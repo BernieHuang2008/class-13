@@ -68,6 +68,18 @@
             transform: translateX(-50%);
         }
 
+        .logo {
+            width: 30%;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 38%;
+            transform: translateX(-50%);
+            background-image: url("9bc6c230aae52903eb94d8ed4c078957.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
         .buttons {
             position: absolute;
             left: 50%;
@@ -81,6 +93,10 @@
             background-color: #333;
             border-radius: 50%;
             margin: 15px 0;
+        }
+
+        .footer {
+            color: red;
         }
     </style>
 </head>
@@ -118,6 +134,8 @@
                 </select>
             </div>
         </div>
+
+        <div class="footer">注意：程序仅供炫技，图片仅供参考，请以选项描述为准!</div>
 
         <div class="preview-container">
             <img id="clothes-image" class="clothes-image" src="https://pic.mksucai.com/00/37/69/72aaf554e8edf758.webp"
@@ -162,7 +180,7 @@
         var render_selector = true;
         if (document.location.href.split('?').length > 1) {
             var page_id = document.location.href.split('?')[1];
-            var choices = page_id.indexOf('-')!=-1?page_id.split('-'):[];
+            var choices = page_id.indexOf('-') != -1 ? page_id.split('-') : [];
             document.innerHTML = '';
             var iframe_html = "";
             choices.forEach(c => {
@@ -179,7 +197,7 @@
             // 更新颜色滤镜
             let hueValue = 0;
             if (colorType.value === 'custom') {
-                
+
             } else {
                 filterValue = colorType.options[colorType.selectedIndex].dataset.filter;
                 hueValue = colorType.options[colorType.selectedIndex].dataset.hue;
@@ -202,6 +220,7 @@
                     </div>
                 `;
             }
+            overlay.innerHTML += '<div class="logo"></div>';
         }
 
         if (render_selector) {
@@ -211,9 +230,9 @@
             colorType.addEventListener('change', () => {
                 updatePreview();
             });
-            setInterval(() => {
-                updatePreview();
-            }, 500);
+            // setInterval(() => {
+            //     updatePreview();
+            // }, 500);
 
             // 初始化
             updatePreview();
