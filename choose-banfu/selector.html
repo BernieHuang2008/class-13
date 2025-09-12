@@ -163,13 +163,13 @@
         var render_selector = true;
         if (document.location.href.split('?').length > 1) {
             var page_id = document.location.href.split('?')[1];
-            var choices = page_id.split('-');
+            var choices = page_id.indexOf('-')!=-1?page_id.split('-'):[];
             document.innerHTML = '';
             var iframe_html = "";
             choices.forEach(c => {
                 iframe_html += `<iframe src="?${c}" style="display: none"></iframe>`;
             })
-            document.write('<script defer src=\"tonji.js\"><\/script>' + `<h2>选项：${decodeURI(page_id)}</h2><h2>已选人数：<span id="page_uv"></span></h2><br><br><hr><h1>提交成功</h1>`);
+            document.write('<script defer src=\"tonji.js\"><\/script>' + `<h2>选项：${decodeURI(page_id)}</h2><h2>已选人数：<span id="page_uv"><span style="color: red">正在提交，别关窗口</span></span></h2><br><br><hr><h1>提交成功</h1>` + iframe_html);
             document.querySelector("#main-content").style.display = "none";
         }
 
@@ -222,6 +222,12 @@
                 toggleCustomColor();
                 updatePreview();
             });
+            setInterval(() => {
+                if (colorType.value === 'custom') {
+                    customHue.value = (parseInt(customHue.value) + 1) % 360;
+                    updatePreview();
+                }
+            }, 500);
             customHue.addEventListener('input', updatePreview);
 
             // 初始化
