@@ -1,0 +1,21 @@
+<script>
+    function render(choices) {
+        iframe_html = "";
+        choices.forEach(c => {
+            iframe_html += `<iframe src="selector.html?${c}"></iframe>`;
+        })
+        return iframe_html;
+    }
+
+    main_html = "";
+    [
+        ["服装类型", ["外套", "卫衣", "棒球服"]],
+        ["开合方式", ["拉链", "纽扣", "无"]],
+        ["颜色", ["黑白", "蓝白", "绿白", "红白"]]
+    ].forEach(section => {
+        main_html += `<h3>${section[0]}</h3>`;
+        main_html += render(section[1]);
+    });
+
+    document.write(main_html);
+</script>

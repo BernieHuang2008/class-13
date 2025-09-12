@@ -1,0 +1,17 @@
+render:
+  - pos: 
+      x: 100
+      y: 200
+    info: name
+    font:
+      size: 100
+      family: "C:/Windows/Fonts/STSONG.TTF"
+      color: ffffff
+  - pos:
+      x: 200
+      y: 300
+    info: birthday
+    font:
+      size: 100
+      family: "C:/Windows/Fonts/STSONG.TTF"
+      color: ffffff
