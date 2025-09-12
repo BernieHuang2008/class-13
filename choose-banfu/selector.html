@@ -225,10 +225,10 @@
             setInterval(() => {
                 if (colorType.value === 'custom') {
                     customHue.value = (parseInt(customHue.value) + 1) % 360;
+                    toggleCustomColor();
                     updatePreview();
                 }
             }, 500);
-            customHue.addEventListener('input', updatePreview);
 
             // 初始化
             updatePreview();
