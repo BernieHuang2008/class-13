@@ -149,15 +149,14 @@
         const clothingType = document.getElementById('clothing-type');
         const closureType = document.getElementById('closure-type');
         const colorType = document.getElementById('color-type');
-        const customHue = document.getElementById('custom-hue');
         const customColorGroup = document.getElementById('custom-color-group');
         const clothesImage = document.getElementById('clothes-image');
         const overlay = document.getElementById('overlay');
 
         const clothingUrls = {
-            jacket: 'https://pic.pngsucai.com/00/27/73/dca0bc29182c0f9a.webp',
-            hoodie: 'https://img.alicdn.com/bao/uploaded/i4/377819308/O1CN01iUhl1g2Id7EqoXoOU_!!377819308.jpg',
-            baseball: 'https://ts1.tc.mm.bing.net/th/id/OIP-C.blUCY1HunVK_iZydA_iwpAAAAA'
+            外套: 'https://pic.pngsucai.com/00/27/73/dca0bc29182c0f9a.webp',
+            卫衣: 'https://img.alicdn.com/bao/uploaded/i4/377819308/O1CN01iUhl1g2Id7EqoXoOU_!!377819308.jpg',
+            棒球服: 'https://ts1.tc.mm.bing.net/th/id/OIP-C.blUCY1HunVK_iZydA_iwpAAAAA'
         };
 
         var render_selector = true;
@@ -180,7 +179,7 @@
             // 更新颜色滤镜
             let hueValue = 0;
             if (colorType.value === 'custom') {
-                hueValue = customHue.value;
+                
             } else {
                 filterValue = colorType.options[colorType.selectedIndex].dataset.filter;
                 hueValue = colorType.options[colorType.selectedIndex].dataset.hue;
@@ -189,12 +188,11 @@
                 clothesImage.style.filter = `${filterValue}`;
             if (hueValue)
                 clothesImage.style.filter = `hue-rotate(${hueValue}deg)`;
-
             // 更新开合方式叠加层
             overlay.innerHTML = '';
-            if (closureType.value === 'zipper') {
+            if (closureType.value === '拉链') {
                 overlay.innerHTML = '<div class="zipper"></div>';
-            } else if (closureType.value === 'buttons') {
+            } else if (closureType.value === '纽扣') {
                 overlay.innerHTML = `
                     <div class="buttons">
                         <div class="button"></div>
@@ -206,28 +204,15 @@
             }
         }
 
-        function toggleCustomColor() {
-            if (colorType.value === 'custom') {
-                customColorGroup.style.display = 'block';
-            } else {
-                customColorGroup.style.display = 'none';
-            }
-        }
-
         if (render_selector) {
             // 事件监听器
             clothingType.addEventListener('change', updatePreview);
             closureType.addEventListener('change', updatePreview);
             colorType.addEventListener('change', () => {
-                toggleCustomColor();
                 updatePreview();
             });
             setInterval(() => {
-                if (colorType.value === 'custom') {
-                    customHue.value = (parseInt(customHue.value) + 1) % 360;
-                    toggleCustomColor();
-                    updatePreview();
-                }
+                updatePreview();
             }, 500);
 
             // 初始化
