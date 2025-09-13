@@ -1,17 +1,17 @@
 render:
-  - pos: 
-      x: 100
-      y: 200
-    info: name
-    font:
-      size: 100
-      family: "C:/Windows/Fonts/STSONG.TTF"
-      color: ffffff
-  - pos:
-      x: 200
-      y: 300
-    info: birthday
-    font:
-      size: 100
-      family: "C:/Windows/Fonts/STSONG.TTF"
-      color: ffffff
+- font:
+    color: ffffff
+    family: STSONG.TTF
+    size: 100
+  info: name
+  pos:
+    x: 800
+    y: 400
+- font:
+    color: aaaaaa
+    family: C:/Windows/Fonts\STXINGKA.TTF
+    size: 50
+  info: greetings
+  pos:
+    x: 800
+    y: 600

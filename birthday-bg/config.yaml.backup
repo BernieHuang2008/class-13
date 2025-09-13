@@ -1,0 +1,17 @@
+render:
+- font:
+    color: ffffff
+    family: STSONG.TTF
+    size: 100
+  info: name
+  pos:
+    x: 800
+    y: 400
+- font:
+    color: aaaaaa
+    family: C:/Windows/Fonts\STXINGKA.TTF
+    size: 50
+  info: greetings
+  pos:
+    x: 800
+    y: 600
