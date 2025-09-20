@@ -9,13 +9,15 @@ from ctypes import wintypes
 from crypto_utils import load_encrypted_text_file, load_encrypted_binary_file
 from io import StringIO, BytesIO
 
+basepath = "D:/birthday-bg/"
+
 def read_csv_data(csv_path):
     """Read birthday data from encrypted CSV file"""
     people = []
     print(csv_path)
     try:
         # Load encrypted CSV content
-        csv_content = load_encrypted_text_file(csv_path)
+        csv_content = load_encrypted_text_file(csv_path, basepath)
         if csv_content is None:
             print(f"Error: Could not load encrypted CSV file: {csv_path}")
             return []
@@ -38,7 +40,7 @@ def read_config(config_path):
     """Read configuration from encrypted YAML file"""
     try:
         # Load encrypted YAML content
-        yaml_content = load_encrypted_text_file(config_path)
+        yaml_content = load_encrypted_text_file(config_path, basepath)
         if yaml_content is None:
             print(f"Error: Could not load encrypted config file: {config_path}")
             return None
@@ -71,7 +73,7 @@ def render_birthday_image(template_path, config, person, output_path):
     """Render birthday image with person's information"""
     try:
         # Load encrypted template image
-        template_data = load_encrypted_binary_file(template_path)
+        template_data = load_encrypted_binary_file(template_path, basepath)
         if template_data is None:
             print(f"Error: Could not load encrypted template: {template_path}")
             return False
@@ -143,12 +145,11 @@ def set_wallpaper(image_path):
 def main():
     """Main program execution"""
     # Define paths (using original names for crypto_utils)
-    base_dir = os.path.dirname(os.path.abspath(__file__))
     csv_path = 'data.csv'  # crypto_utils will handle the encrypted path
     config_path = 'config.yaml'  # crypto_utils will handle the encrypted path
     template_path = 'bgs/template.png'  # crypto_utils will handle the encrypted path
     default_path = 'bgs/default.png'  # crypto_utils will handle the encrypted path
-    rendered_path = os.path.join(base_dir, 'bgs', 'birthday_rendered.png')
+    rendered_path = os.path.join(basepath, 'bgs', 'birthday_rendered.png')
     
     # Read data and config
     people = read_csv_data(csv_path)
@@ -176,10 +177,10 @@ def main():
     # Handle wallpaper setting
     if wallpaper_path == default_path:
         # For default image, check if encrypted version exists
-        default_data = load_encrypted_binary_file(default_path)
+        default_data = load_encrypted_binary_file(default_path, basepath)
         if default_data:
             # Save decrypted default image temporarily
-            temp_default_path = os.path.join(base_dir, 'bgs', 'temp_default.png')
+            temp_default_path = os.path.join(basepath, 'bgs', 'temp_default.png')
             with open(temp_default_path, 'wb') as f:
                 f.write(default_data)
             wallpaper_path = temp_default_path

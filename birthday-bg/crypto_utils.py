@@ -90,9 +90,10 @@ def get_encrypted_path(original_path):
         return encrypted_filename
 
 
-def load_encrypted_text_file(original_path):
+def load_encrypted_text_file(original_path, basepath=""):
     """Load and decrypt a text file, return as string"""
     encrypted_path = get_encrypted_path(original_path)
+    encrypted_path = os.path.join(basepath, encrypted_path)
 
     if not os.path.exists(encrypted_path):
         return None
@@ -122,9 +123,10 @@ def save_encrypted_text_file(original_path, content):
         return False
 
 
-def load_encrypted_binary_file(original_path):
+def load_encrypted_binary_file(original_path, basepath=""):
     """Load and decrypt a binary file, return as bytes"""
     encrypted_path = get_encrypted_path(original_path)
+    encrypted_path = os.path.join(basepath, encrypted_path)
 
     if not os.path.exists(encrypted_path):
         return None
